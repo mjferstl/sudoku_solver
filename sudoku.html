@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sudoku</title>
+
+<meta name="viewport" content="width=device-width"/>
+<meta name="description" content="Sudoku"/>
+<meta name="keywords" content="Sudoku">
+<meta charset="UTF-8"> 
+
+<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="Sudoku.js"></script>
+    
+<style>
+    .inputNumber{
+        width: 30px;   
+        text-align: center;
+    }
+    td:first-child {
+      border-left: 1pt solid;
+    }
+    td:nth-child(3n) {
+      border-right: 1pt solid ;
+    }
+    tr:first-child {
+      border-top: 1pt solid;
+    }
+    tr:nth-child(3n) td {
+      border-bottom: 1pt solid ;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        /* display: none; <- Crashes Chrome on hover */
+        -webkit-appearance: none;
+        margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
+</style>
+</head>
+<body>
+    <div id="info" style="font-family: sans-serif">Ich kann dieses Sudoku nicht lösen :(</div>
+    <div>
+        <table>
+            <tr>
+                <td><input class="inputNumber" id="Sudoku_1_1" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_1_2" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_1_3" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_1_4" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_1_5" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_1_6" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_1_7" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_1_8" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_1_9" type="number"/></td>
+            </tr>
+            <tr>
+                <td><input class="inputNumber" id="Sudoku_2_1" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_2_2" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_2_3" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_2_4" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_2_5" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_2_6" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_2_7" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_2_8" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_2_9" type="number"/></td>
+            </tr>
+            <tr>
+                <td><input class="inputNumber" id="Sudoku_3_1" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_3_2" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_3_3" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_3_4" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_3_5" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_3_6" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_3_7" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_3_8" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_3_9" type="number"/></td>
+            </tr>
+            <tr>
+                <td><input class="inputNumber" id="Sudoku_4_1" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_4_2" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_4_3" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_4_4" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_4_5" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_4_6" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_4_7" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_4_8" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_4_9" type="number"/></td>
+            </tr>
+            <tr>
+                <td><input class="inputNumber" id="Sudoku_5_1" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_5_2" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_5_3" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_5_4" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_5_5" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_5_6" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_5_7" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_5_8" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_5_9" type="number"/></td>
+            </tr>
+            <tr>
+                <td><input class="inputNumber" id="Sudoku_6_1" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_6_2" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_6_3" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_6_4" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_6_5" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_6_6" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_6_7" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_6_8" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_6_9" type="number"/></td>
+            </tr>
+            <tr>
+                <td><input class="inputNumber" id="Sudoku_7_1" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_7_2" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_7_3" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_7_4" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_7_5" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_7_6" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_7_7" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_7_8" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_7_9" type="number"/></td>
+            </tr>
+            <tr>
+                <td><input class="inputNumber" id="Sudoku_8_1" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_8_2" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_8_3" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_8_4" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_8_5" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_8_6" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_8_7" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_8_8" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_8_9" type="number"/></td>
+            </tr>
+            <tr>
+                <td><input class="inputNumber" id="Sudoku_9_1" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_9_2" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_9_3" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_9_4" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_9_5" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_9_6" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_9_7" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_9_8" type="number"/></td>
+                <td><input class="inputNumber" id="Sudoku_9_9" type="number"/></td>
+            </tr>
+        </table>
+    </div>
+<div>
+    <button id="solve">Start</button>
+    <button id="loadEasySudoku">einfaches Sudoku laden</button>
+    <button id="loadMiddleSudoku">mittleres Sudoku laden</button>
+    <button id="loadHardSudoku">schweres Sudoku laden</button>
+</div>
+</body>
+</html>
